@@ -12,78 +12,51 @@
 
 #include "../include/minitalk.h"
 
-char	*convert_bin(char *str);
-void	fill(char *bin, int c, int *i);
-void	send(char *bin, int pid);
+void	send(char *str, int pid);
 
 int	main(int argc, char **argv)
 {
 	int		pid;
-	char	*bin;
-	int		i;
 
-	i = 0;
 	if (argc != 3)
 		return (1);
 	pid = ft_atoi(argv[1]);
-	bin = convert_bin(argv[2]);
-	if (!bin)
-		return (2);
-	send(bin, pid);
-	free(bin);
+	send(argv[2], pid);
 	return (0);
 }
 
-void	send(char *bin, int pid)
+void	send(char *str, int pid)
 {
 	int		i;
-
-	i = 0;
-	while (bin[i])
-	{
-		if (bin[i] == '0')
-		{
-			kill(pid, SIGUSR1);
-			usleep(10000);
-		}
-		else
-		{
-			kill(pid, SIGUSR2);
-			usleep(10000);
-		}
-		i++;
-	}
-}
-
-char	*convert_bin(char *str)
-{
-	char	*bin;
-	size_t	len;
-	int		i;
+	int		j;
 	int		x;
 
-	x = 0;
 	i = 0;
-	len = ft_strlen(str) * 8;
-	bin = malloc(sizeof(char) * (len + 1));
-	if (!bin)
-		return (NULL);
+	x = 1 << 7;
 	while (str[i])
 	{
-		fill(bin, str[i], &x);
+		j = 0;
+		while (j < 8)
+		{
+			if (str[i] & (x >> j++))
+			{
+				ft_printf("1");
+				kill(pid, SIGUSR2);
+			}
+			else
+			{
+				ft_printf("0");
+				kill(pid, SIGUSR1);
+			}
+			usleep(100000);
+		}
 		i++;
 	}
-	bin[x] = '\0';
-	return (bin);
-}
-
-void	fill(char *bin, int c, int *i)
-{
-	if (c >= 2)
+	i = 0;
+	while (i++ < 8)
 	{
-		fill(bin, c / 2, i);
-		fill(bin, c % 2, i);
+		ft_printf("0");
+		kill(pid, SIGUSR1);
+		usleep(100000);
 	}
-	else
-		bin[(*i)++] = '0' + c;
 }

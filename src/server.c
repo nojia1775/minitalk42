@@ -12,53 +12,69 @@
 
 #include "../include/minitalk.h"
 
-char	buf[1000000] = {0};
+char	g_buf[1000000] = {0};
 
-void	handler0(int sig);
-void	handler1(int sig);
+void	handler(int sig);
 void	clean(char *buf);
+void	print(void);
 
 int	main(void)
 {
-	struct sigaction	zero;
-	struct sigaction	un;
-
-	zero.sa_handler = handler0;
-	un.sa_handler = handler1;
-	sigaction(SIGUSR1, &zero, NULL);
-	sigaction(SIGUSR2, &un, NULL);
+	struct sigaction	action;
+	
+	action.sa_handler = handler;
+	if (sigaction(SIGUSR1, &action, NULL) == -1 ||
+		sigaction(SIGUSR2, &action, NULL) == -1)
+		exit(EXIT_FAILURE);
 	ft_printf("PID = %d\n", getpid());
 	while (1)
 		sleep(1);
 	return (0);
 }
 
-void	handler0(int sig)
+void	handler(int sig)
 {
 	int		i;
+	int		count;
 
 	i = 0;
+	count = 0;
+	while (g_buf[i])
+		i++;
 	if (sig == SIGUSR1)
 	{
 		ft_printf("0");
-		while (buf[i])
-			i++;
-		buf[i] = '0';
+                g_buf[i] = '0';
+	}
+	else
+	{
+		ft_printf("1");
+		g_buf[i] = '1';
+	}
+	i = ft_strlen(g_buf) - 1;
+	while (g_buf[i])
+	{	
+		if (g_buf[i--] == '0')
+			count++;
+		else
+			count = 0;
+		if (count == 8)
+		{
+			//print();
+			clean(g_buf);
+			return ;
+		}
 	}
 }
 
-void	handler1(int sig)
+void	print(void)
 {
-	int		i;
+	char	*dec;
 
-	i = 0;
-	if (sig == SIGUSR2)
-	{
-		ft_printf("1");
-		while (buf[i])
-			i++;
-		buf[i] = '1';
-	}
+	dec = convert_dec(g_buf);
+	if (!dec)
+		return ;
+	ft_printf("%s\n", dec);
 }
 
 void	clean(char *buf)
@@ -66,6 +82,6 @@ void	clean(char *buf)
 	int		i;
 
 	i = 0;
-	while (buf[i])
+	while (buf[i] != '\0')
 		buf[i++] = '\0';
 }

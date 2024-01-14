@@ -14,6 +14,9 @@
 
 # define MINITALK_H
 
+int	up(int n, int pow);
+char	*convert_dec(char *bin);
+
 # include <signal.h>
 # include "libft.h"
 # include "ft_printf.h"

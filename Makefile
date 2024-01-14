@@ -2,9 +2,11 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS_C = src/client.c 
+SRCS_C = src/client.c \
+	 src/up.c
 
-SRCS_S = src/server.c
+SRCS_S = src/server.c \
+	 src/convert_dec.c
 
 OBJS_C = $(SRCS_C:.c=.o)
 
