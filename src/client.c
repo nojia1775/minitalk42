@@ -39,24 +39,17 @@ void	send(char *str, int pid)
 		while (j < 8)
 		{
 			if (str[i] & (x >> j++))
-			{
-				ft_printf("1");
 				kill(pid, SIGUSR2);
-			}
 			else
-			{
-				ft_printf("0");
 				kill(pid, SIGUSR1);
-			}
-			usleep(100000);
+			usleep(10000);
 		}
 		i++;
 	}
 	i = 0;
 	while (i++ < 8)
 	{
-		ft_printf("0");
 		kill(pid, SIGUSR1);
-		usleep(100000);
+		usleep(10000);
 	}
 }

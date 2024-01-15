@@ -42,15 +42,9 @@ void	handler(int sig)
 	while (g_buf[i])
 		i++;
 	if (sig == SIGUSR1)
-	{
-		ft_printf("0");
                 g_buf[i] = '0';
-	}
 	else
-	{
-		ft_printf("1");
 		g_buf[i] = '1';
-	}
 	i = ft_strlen(g_buf) - 1;
 	while (g_buf[i])
 	{	
@@ -58,9 +52,9 @@ void	handler(int sig)
 			count++;
 		else
 			count = 0;
-		if (count == 8)
+		if (count == 8 && ft_strlen(g_buf) % 8 == 0) 
 		{
-			//print();
+			print();
 			clean(g_buf);
 			return ;
 		}
