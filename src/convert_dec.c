@@ -15,19 +15,6 @@ char	*convert_dec(char *bin)
 	if (!dec)
 		return (NULL);
 	dec[len] = '\0';
-	/*
-	while (i < len)
-	{
-		j = 0;
-		while (j < 8)
-		{
-			tmp[j] = bin[i + j];
-			j++;
-		}
-		i += 8;
-		tmp[8] = '\0';
-		lbl(dec, tmp, len);
-	}*/
 	lbl(dec, tmp, len, bin);
 	return (dec);
 }
@@ -53,12 +40,6 @@ void	lbl(char *dec, char *tmp, int len, char *bin)
 		dec[count++] = conv(tmp);
 		clear(tmp);
 	}
-	/*
-	int	i;
-
-	i = 0;
-	while (i < len)
-		dec[i++] = conv(tmp);*/
 }
 
 int	conv(char *tmp)
