@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert_dec.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nadjemia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/19 10:31:18 by nadjemia          #+#    #+#             */
+/*   Updated: 2024/01/19 10:31:40 by nadjemia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minitalk.h"
 
 void	lbl(char *dec, char *tmp, int len, char *bin);
-int	conv(char *tmp);
+int		conv(char *tmp);
 void	clear(char *tmp);
 
 char	*convert_dec(char *bin)

@@ -6,7 +6,7 @@
 /*   By: nadjemia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 12:00:18 by nadjemia          #+#    #+#             */
-/*   Updated: 2024/01/13 12:01:12 by nadjemia         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:46:21 by nadjemia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 # define MINITALK_H
 
-int	up(int n, int pow);
-char	*convert_dec(char *bin);
-
 # include <signal.h>
 # include "libft.h"
 # include "ft_printf.h"
+
+char	*convert_dec(char *bin);
 
 #endif

@@ -6,22 +6,29 @@
 /*   By: nadjemia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:52:30 by nadjemia          #+#    #+#             */
-/*   Updated: 2024/01/13 12:59:07 by nadjemia         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:29:02 by nadjemia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
+#include "../include/color.h"
 
 void	send(char *str, int pid);
+void	handle(int sig);
 
 int	main(int argc, char **argv)
 {
-	int		pid;
+	int					pid;
+	struct sigaction	action;
 
+	action.sa_handler = handle;
+	if (sigaction(SIGUSR1, &action, NULL) == -1)
+		return (1);
 	if (argc != 3)
 		return (1);
 	pid = ft_atoi(argv[1]);
 	send(argv[2], pid);
+	pause();
 	return (0);
 }
 
@@ -42,7 +49,7 @@ void	send(char *str, int pid)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			usleep(10000);
+			usleep(400);
 		}
 		i++;
 	}
@@ -50,6 +57,12 @@ void	send(char *str, int pid)
 	while (i++ < 8)
 	{
 		kill(pid, SIGUSR1);
-		usleep(10000);
+		usleep(400);
 	}
+}
+
+void	handle(int sig)
+{
+	if (sig == SIGUSR1)
+		ft_printf("%sLe message a ete recu%s\n", BGREEN, RESET);
 }
