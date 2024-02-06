@@ -6,7 +6,7 @@
 /*   By: nadjemia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 11:03:30 by nadjemia          #+#    #+#             */
-/*   Updated: 2024/01/24 16:34:55 by nadjemia         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:32:47 by nadjemia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(void)
 	usleep(1000);
 	ft_printf("\n\t\t  %sSERVER MINITALK%s\n\n", BRED, RESET);
 	ft_printf("PID = %s%d%s\n", GREEN, getpid(), RESET);
-	ft_printf("Zone de texte :\n");
+	ft_printf("Text zone :\n");
 	ft_printf("_____________________________________________________\n\n");
 	while (1)
 		sleep(1);

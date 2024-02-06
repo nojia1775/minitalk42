@@ -6,7 +6,7 @@
 /*   By: nadjemia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 13:52:30 by nadjemia          #+#    #+#             */
-/*   Updated: 2024/01/24 11:29:02 by nadjemia         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:32:12 by nadjemia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	send(char *str, int pid)
 void	handle(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("%sLe message a ete recu%s\n", BGREEN, RESET);
+		ft_printf("%sThe message has been received succesfuly%s\n", BGREEN, RESET);
 }
